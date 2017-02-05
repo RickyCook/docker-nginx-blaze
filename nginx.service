@@ -19,9 +19,6 @@ ExecStart=/bin/docker run \
   --name %n \
   --publish 80:80 --publish 443:443 \
   --link couchpotato.service \
-  --link deluge.service \
-  --link muximux.service \
-  --link plex.service \
   --link sabnzbd.service \
   --link sonarr.service \
   nginx-blaze:latest
