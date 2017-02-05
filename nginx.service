@@ -1,8 +1,8 @@
 [Unit]
 Description=Nginx service router
-After=docker.service couchpotato.service deluge.service muximux.service plex.service sabnzbd.service sonarr.service
+After=docker.service couchpotato.service sabnzbd.service sonarr.service
 Requires=docker.service
-Wants=couchpotato.service deluge.service muximux.service plex.service sabnzbd.service sonarr.service
+Wants=couchpotato.service sabnzbd.service sonarr.service
 
 [Service]
 WorkingDirectory=/srv/docker-nginx-blaze
