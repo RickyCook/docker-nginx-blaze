@@ -1,6 +1,2 @@
 #!/usr/bin/with-contenv bash
-
-umask 022
-
-exec \
-	/usr/sbin/crond -f
+exec /usr/sbin/crond -f
