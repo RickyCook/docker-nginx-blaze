@@ -18,6 +18,7 @@ ExecStart=/bin/docker run \
   --rm \
   --name %n \
   --publish 80:80 --publish 443:443 \
+  -e SSL_DOMAIN=h.thatpanda.com \
   --link couchpotato.service \
   --link sabnzbd.service \
   --link sonarr.service \

@@ -1,2 +1,24 @@
 #!/usr/bin/with-contenv bash
+CONFD_DIR=/etc/nginx/conf.d
+ENABLED_FN=${CONFD_DIR}/default-ssl.conf
+DISABLED_FN=${ENABLED_FN}.disabled
+
+function run_ssl {
+  mv $DISABLED_FN $ENABLED_FN || true
+  exec /usr/sbin/nginx
+}
+function run_no_ssl {
+}
+
+if [[ -f /etc/ssl/acme/fullchain.pem ]]; then
+  run_ssl
+else
+  mv $ENABLED_FN $DISABLED_FN || true
+  exec /usr/sbin/nginx &
+  nginx_pid=$!
+  acme-client $SSL_DOMAIN
+  kill $nginx_pid
+  run_ssl
+fi
+
 exec /usr/sbin/nginx
