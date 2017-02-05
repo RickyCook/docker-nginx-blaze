@@ -1,0 +1,27 @@
+[Unit]
+Description=Nginx service router
+After=docker.service couchpotato.service deluge.service muximux.service plex.service sabnzbd.service sonarr.service
+Requires=docker.service
+Wants=couchpotato.service deluge.service muximux.service plex.service sabnzbd.service sonarr.service
+
+[Service]
+WorkingDirectory=/srv/docker-nginx-blaze
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/bin/git pull
+ExecStartPre=/bin/docker build --tag nginx-blaze:latest .
+ExecStartPre=-/bin/docker stop %n
+ExecStartPre=-/bin/docker rm %n
+ExecStartPre=-/bin/docker rmi nginx-blaze:latest-bak
+ExecStartPre=-/bin/docker tag nginx-blaze:latest nginx-blaze:latest-bak
+ExecStart=/bin/docker run \
+  --rm \
+  --name %n \
+  --publish 80:80 --publish 443:443 \
+  --link couchpotato.service \
+  --link deluge.service \
+  --link muximux.service \
+  --link plex.service \
+  --link sabnzbd.service \
+  --link sonarr.service \
+  nginx-blaze:latest
