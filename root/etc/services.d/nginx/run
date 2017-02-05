@@ -7,8 +7,6 @@ function run_ssl {
   mv $DISABLED_FN $ENABLED_FN || true
   exec /usr/sbin/nginx
 }
-function run_no_ssl {
-}
 
 if [[ -f /etc/ssl/acme/fullchain.pem ]]; then
   run_ssl
