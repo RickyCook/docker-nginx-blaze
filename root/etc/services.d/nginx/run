@@ -14,7 +14,7 @@ else
   mv $ENABLED_FN $DISABLED_FN || true
   exec /usr/sbin/nginx &
   nginx_pid=$!
-  acme-client $SSL_DOMAIN
+  acme-client -vNn $SSL_DOMAIN
   kill $nginx_pid
   run_ssl
 fi
