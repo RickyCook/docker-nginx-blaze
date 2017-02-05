@@ -1,0 +1,2 @@
+#!/bin/sh
+acme-client "$SSL_CERT_DOMAIN";
