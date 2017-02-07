@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv bash
-mkdir -p /config /run /var/lib/nginx/tmp/client_body
+mkdir -p /config /log /run /var/lib/nginx/tmp/client_body
 chown -R abc:abc \
 	/config \
+  /log \
 	/run \
 	/var/lib/nginx

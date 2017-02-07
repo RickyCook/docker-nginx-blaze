@@ -13,10 +13,10 @@ if [[ -f /etc/ssl/acme/fullchain.pem ]]; then
 else
   mv $ENABLED_HTTPS_FN $DISABLED_HTTPS_FN || true
   exec /usr/sbin/nginx
-  #nginx_pid=$!
-  #acme-client -vNn $SSL_DOMAIN
-  #kill $nginx_pid
-  #run_ssl
+  nginx_pid=$!
+  acme-client -vNn -c /certs $SSL_DOMAIN
+  kill $nginx_pid
+  run_ssl
 fi
 
 exec /usr/sbin/nginx

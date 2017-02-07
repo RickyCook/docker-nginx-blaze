@@ -18,7 +18,9 @@ ExecStart=/bin/docker run \
   --rm \
   --name %n \
   --publish 80:80 --publish 443:443 \
-  -e SSL_DOMAIN=h.thatpanda.com \
+  --env SSL_DOMAIN=h.thatpanda.com \
+  --volume /etc/ssl/docker-nginx:/certs \
+  --volume /var/log/docker-nginx:/log \
   --link couchpotato.service \
   --link muximux.service \
   --link sabnzbd.service \
