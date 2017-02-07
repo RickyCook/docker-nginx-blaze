@@ -12,7 +12,7 @@ if [[ -f /etc/ssl/acme/fullchain.pem ]]; then
   run_ssl
 else
   mv $ENABLED_HTTPS_FN $DISABLED_HTTPS_FN || true
-  exec /usr/sbin/nginx
+  exec /usr/sbin/nginx  # TODO background for SSL
   nginx_pid=$!
   acme-client -vNn -c /certs $SSL_DOMAIN
   kill $nginx_pid
